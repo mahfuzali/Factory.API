@@ -30,11 +30,12 @@ namespace Factory.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-
             var connectionString = Configuration["ConnectionStrings:StoreConnections"];
             services.AddDbContext<CustomersContext>(o => o.UseSqlServer(connectionString));
+            services.AddDbContext<SuppliersContext>(o => o.UseSqlServer(connectionString));
 
             services.AddScoped<ICustomersRepository, CustomersRepository>();
+            services.AddScoped<ISuppliersRepository, SuppliersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
