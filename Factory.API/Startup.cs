@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Factory.API.Contexts;
 using Factory.API.Services;
+using Factory.API.Services.Interface;
+using Factory.API.Services.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,9 +35,11 @@ namespace Factory.API
             var connectionString = Configuration["ConnectionStrings:StoreConnections"];
             services.AddDbContext<CustomersContext>(o => o.UseSqlServer(connectionString));
             services.AddDbContext<SuppliersContext>(o => o.UseSqlServer(connectionString));
+            services.AddDbContext<ProductsContext>(o => o.UseSqlServer(connectionString));
 
             services.AddScoped<ICustomersRepository, CustomersRepository>();
             services.AddScoped<ISuppliersRepository, SuppliersRepository>();
+            services.AddScoped<IProductsRepository, ProductsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

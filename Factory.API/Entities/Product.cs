@@ -24,8 +24,7 @@ namespace Factory.API.Entities
         public string Package { get; set; }
 
         [Required]
-        [Range(0, 1)]
-        public int IsDiscontinued { get; set; }
+        public bool IsDiscontinued { get; set; }
 
         public Supplier Supplier { get; set; }
     }
