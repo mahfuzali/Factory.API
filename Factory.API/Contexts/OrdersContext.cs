@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Factory.API.Contexts
 {
-    public class ProductsContext: DbContext 
+    public class OrdersContext : DbContext
     {
-        public DbSet<Product> Product { get; set; }
-        
-        public ProductsContext(DbContextOptions<ProductsContext> options)
+        public DbSet<Order> Order { get; set; }
+
+        public OrdersContext(DbContextOptions<OrdersContext> options)
             : base(options)
         {
 
