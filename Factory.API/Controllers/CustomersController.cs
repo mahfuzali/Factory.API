@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Factory.API.Controllers
 {
-    [Route("api/customers")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CustomersController: ControllerBase
     {
