@@ -48,16 +48,6 @@ namespace Factory.API
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IOrderItemsRepository, OrderItemsRepository>();
 
-            /*
-            var config = new AutoMapper.MapperConfiguration(c =>
-               c.AddProfile(new OrdersProfile())
-            );
-
-            var mapper = config.CreateMapper();
-
-            services.AddSingleton(mapper);
-            */
-
             services.AddAutoMapper();
 
         }

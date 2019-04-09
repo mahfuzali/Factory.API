@@ -1,4 +1,7 @@
-﻿using Factory.API.Services;
+﻿using AutoMapper;
+using Factory.API.Entities;
+using Factory.API.Models;
+using Factory.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,17 +16,23 @@ namespace Factory.API.Controllers
     {
         private ICustomersRepository _customersRepository;
 
-        public CustomersController(ICustomersRepository customersRepository)
+        private readonly IMapper _mapper;
+
+        public CustomersController(ICustomersRepository customersRepository, IMapper mapper)
         {
             _customersRepository = customersRepository ??
                 throw new ArgumentNullException(nameof(customersRepository));
+
+            _mapper = mapper ??
+                throw new ArgumentException(nameof(mapper));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
             var customersEntities = await _customersRepository.GetCustomersAsync();
-            return Ok(customersEntities);
+            return Ok(_mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDTO>>(customersEntities));
+            //return Ok(customersEntities);
         }
 
         [HttpGet]
@@ -36,8 +45,11 @@ namespace Factory.API.Controllers
                 return NotFound();
             }
 
-            return Ok(customerEntity);
+            return Ok(_mapper.Map<Customer, CustomerDTO>(customerEntity));
+            //return Ok(customerEntity);
         }
+
+
 
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Factory.API.Entities;
-using Factory.API.Filters;
 using Factory.API.Models;
 using Factory.API.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +19,7 @@ namespace Factory.API.Controllers
         private IOrdersRepository _ordersRepository;
 
         private readonly IMapper _mapper;
+
         public OrdersController(IOrdersRepository ordersRepository, IMapper mapper)
         {
             _ordersRepository = ordersRepository ??
@@ -30,7 +30,6 @@ namespace Factory.API.Controllers
         }
 
         [HttpGet]
-        //[OrdersResultFilter]
         public async Task<IActionResult> GetOrders()
         {
             var ordersEntities = await _ordersRepository.GetOrdersAsync();
@@ -39,7 +38,6 @@ namespace Factory.API.Controllers
         }
 
         [HttpGet]
-        //[OrderResultFilter]
         [Route("{id}")]
         public async Task<IActionResult> GetOrder(int id)
         {
@@ -49,7 +47,8 @@ namespace Factory.API.Controllers
                 return NotFound();
             }
 
-            return Ok(orderEntities);
+            return Ok(_mapper.Map<Order, OrderDTO>(orderEntities));
+            //return Ok(orderEntities);
         }
     }
 }
