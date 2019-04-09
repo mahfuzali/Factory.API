@@ -8,6 +8,8 @@ namespace Factory.API.Services.Interface
 {
     public interface IOrdersRepository
     {
+        IEnumerable<Order> GetBooks();
+
         Task<IEnumerable<Order>> GetOrdersAsync();
         Task<Order> GetOrderAsync(int id);
     }

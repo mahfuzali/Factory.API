@@ -28,6 +28,11 @@ namespace Factory.API.Services.Repository
             return await _context.Order.Include(o => o.Customer).ToListAsync();
         }
 
+        public IEnumerable<Order> GetBooks()
+        {
+            return _context.Order.Include(o => o.Customer).ToList();
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -46,5 +51,7 @@ namespace Factory.API.Services.Repository
 
             }
         }
+
+
     }
 }

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Factory.API.Entities;
+using Factory.API.Filters;
+using Factory.API.Models;
 using Factory.API.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,20 +19,27 @@ namespace Factory.API.Controllers
     {
         private IOrdersRepository _ordersRepository;
 
-        public OrdersController(IOrdersRepository ordersRepository)
+        private readonly IMapper _mapper;
+        public OrdersController(IOrdersRepository ordersRepository, IMapper mapper)
         {
             _ordersRepository = ordersRepository ??
                 throw new ArgumentNullException(nameof(ordersRepository));
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
+
         }
 
         [HttpGet]
+        //[OrdersResultFilter]
         public async Task<IActionResult> GetOrders()
         {
             var ordersEntities = await _ordersRepository.GetOrdersAsync();
-            return Ok(ordersEntities);
+            return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderDTO>>(ordersEntities));
+            //return Ok(ordersEntities);
         }
 
         [HttpGet]
+        //[OrderResultFilter]
         [Route("{id}")]
         public async Task<IActionResult> GetOrder(int id)
         {

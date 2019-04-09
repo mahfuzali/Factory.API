@@ -15,7 +15,7 @@ namespace Factory.API.Entities
 
         [Required]
         [StringLength(10)]
-        public String OrderNumber { get; set; }
+        public string OrderNumber { get; set; }
 
         public int CustomerId { get; set; }
 

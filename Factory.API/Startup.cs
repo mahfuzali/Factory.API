@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Factory.API.Contexts;
-using Factory.API.Services;
-using Factory.API.Services.Interface;
-using Factory.API.Services.Repository;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -15,6 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Factory.API.Contexts;
+using Factory.API.Services;
+using Factory.API.Services.Interface;
+using Factory.API.Services.Repository;
 
 namespace Factory.API
 {
@@ -44,6 +47,19 @@ namespace Factory.API
             services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IOrderItemsRepository, OrderItemsRepository>();
+
+            /*
+            var config = new AutoMapper.MapperConfiguration(c =>
+               c.AddProfile(new OrdersProfile())
+            );
+
+            var mapper = config.CreateMapper();
+
+            services.AddSingleton(mapper);
+            */
+
+            services.AddAutoMapper();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +74,8 @@ namespace Factory.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            
 
             app.UseHttpsRedirection();
             app.UseMvc();
