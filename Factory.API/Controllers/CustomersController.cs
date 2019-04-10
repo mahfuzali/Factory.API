@@ -36,7 +36,7 @@ namespace Factory.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id}", Name = "GetCustomer")]
         public async Task<IActionResult> GetCustomer(int id)
         {
             var customerEntity = await _customersRepository.GetCustomerAsync(id);
@@ -47,6 +47,22 @@ namespace Factory.API.Controllers
 
             return Ok(_mapper.Map<Customer, CustomerDTO>(customerEntity));
             //return Ok(customerEntity);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCustomer([FromBody] CustomerForCreation customer)
+        {
+            var customerEntity = _mapper.Map<Customer>(customer);
+
+            _customersRepository.AddCustomer(customerEntity);
+
+            await _customersRepository.SaveChangesAsync();
+
+            await _customersRepository.GetCustomerAsync(customerEntity.Id);
+
+            return CreatedAtRoute("GetCustomer",
+                new { id = customerEntity.Id },
+                customerEntity);
         }
 
 

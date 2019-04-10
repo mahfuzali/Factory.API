@@ -8,7 +8,7 @@ namespace Factory.API.Entities
 {
     public class Customer
     {
-        [Required]
+ 
         public int Id { get; set; }
         
         [Required]

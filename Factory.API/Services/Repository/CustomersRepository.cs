@@ -27,6 +27,31 @@ namespace Factory.API.Services
             return await _context.Customer.ToListAsync();
         }
 
+        public void AddCustomer(Customer customerToAdd)
+        {
+            if (customerToAdd == null)
+            {
+                throw new ArgumentNullException(nameof(customerToAdd));
+            }
+
+            _context.Add(customerToAdd);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() > 0);
+        }
+
+        public async Task<IEnumerable<Customer>> GetCustomersAsync(IEnumerable<int> customerIds)
+        {
+            return await _context.Customer.Where(b => customerIds.Contains(b.Id)).ToListAsync();
+        }
+
+        public IEnumerable<Customer> GetCustomers()
+        {
+            return _context.Customer.ToList();
+        }
+
         public void Dispose()
         {
             Dispose(true);
