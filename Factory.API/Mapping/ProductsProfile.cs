@@ -12,15 +12,15 @@ namespace Factory.API.Mapping
     {
         public ProductsProfile()
         {
-
+            /*
+            CreateMap<Product, ProductDTO>()
+                   .ReverseMap();
+            */
 
             CreateMap<Product, ProductDTO>()
-                   //.ForMember(dest => dest.Supplier, opt => opt.MapFrom(src =>
-                   //$"{src.Supplier.CompanyName}"))
-                   //.ForMember(dest => dest.Supplier, opt => opt)
-                   .ReverseMap()
-               ;
-
+                .ForMember(dest => dest.Supplier, opt => opt.MapFrom(src =>
+                   $"{src.Supplier.CompanyName}"))
+                .ReverseMap();
         }
     }
 }

@@ -17,6 +17,6 @@ namespace Factory.API.Models
 
         public bool IsDiscontinued { get; set; }
 
-        //public string Supplier { get; set; }
+        public string Supplier { get; set; }
     }
 }

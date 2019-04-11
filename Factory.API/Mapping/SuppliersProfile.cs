@@ -12,14 +12,14 @@ namespace Factory.API.Mapping
     {
         public SuppliersProfile()
         {
-       
+
             CreateMap<Supplier, SupplierDTO>()
                 .ReverseMap();
-     
+            /**/
 
 
 
-
+                         
 
         }
     }
