@@ -32,5 +32,7 @@ namespace Factory.API.Entities
 
         [StringLength(30)]
         public string Fax { get; set; }
+
+        public ICollection<Product> Products { get; set; }
     }
 }

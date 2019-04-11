@@ -19,7 +19,10 @@ namespace Factory.API.Services
 
         public async Task<Supplier> GetSupplierAsync(int id)
         {
-            return await _context.Supplier.FirstOrDefaultAsync(s => s.Id == id);
+            // .Include(p => p.Products)
+            return await _context.Supplier
+                .Include(p => p.Products)
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<IEnumerable<Supplier>> GetSuppliersAsync()

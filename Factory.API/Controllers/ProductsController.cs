@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Factory.API.Entities;
+using Factory.API.Models;
 using Factory.API.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,18 +17,23 @@ namespace Factory.API.Controllers
     public class ProductsController : ControllerBase
     {
         private IProductsRepository _productsRepository;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IProductsRepository productsRepository)
+        public ProductsController(IProductsRepository productsRepository, IMapper mapper)
         {
             _productsRepository = productsRepository ??
                 throw new ArgumentNullException(nameof(productsRepository));
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
             var productsEntities = await _productsRepository.GetProductsAsync();
-            return Ok(productsEntities);
+            //return Ok(productsEntities);
+            return Ok(_mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(productsEntities));
+
         }
 
         [HttpGet]
@@ -38,7 +46,8 @@ namespace Factory.API.Controllers
                 return NotFound();
             }
 
-            return Ok(productEntities);
+            //return Ok(productEntities);
+            return Ok(_mapper.Map<Product, ProductDTO>(productEntities));
         }
     }
 }

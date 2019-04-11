@@ -54,6 +54,13 @@ namespace Factory.API.Controllers
         {
             var customerEntity = _mapper.Map<Customer>(customer);
 
+            var search = _customersRepository.CheckCustomerExists(customerEntity);
+
+            if (search != null)
+            {
+                return BadRequest("Customer Exists");
+            }
+
             _customersRepository.AddCustomer(customerEntity);
 
             await _customersRepository.SaveChangesAsync();

@@ -37,6 +37,17 @@ namespace Factory.API.Services
             _context.Add(customerToAdd);
         }
 
+        public async Task<Customer> CheckCustomerExists(Customer customerToAdd)
+        {
+            if (customerToAdd == null)
+            {
+                throw new ArgumentNullException(nameof(customerToAdd));
+            }
+
+            return await _context.Customer.FindAsync(customerToAdd);
+        }
+        /**/
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync() > 0);

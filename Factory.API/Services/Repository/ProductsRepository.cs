@@ -20,12 +20,12 @@ namespace Factory.API.Services.Repository
 
         public async Task<Product> GetProductAsync(int id)
         {
-            return await _context.Product.Include(p => p.Supplier).FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Product.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync()
         {
-            return await _context.Product.Include(p => p.Supplier).ToListAsync(); 
+            return await _context.Product.ToListAsync(); 
         }
 
         public void Dispose()
