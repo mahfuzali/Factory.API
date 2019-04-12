@@ -37,6 +37,42 @@ namespace Factory.API.Services.Repository
                     .ThenInclude(s => s.Supplier)
                 .ToListAsync();
         }
+
+        public void AddOrderItem(OrderItem orderToAdd)
+        {
+            if (orderToAdd == null)
+            {
+                throw new ArgumentNullException(nameof(orderToAdd));
+            }
+
+            _context.Add(orderToAdd);
+        }
+
+        public void DeleteOrderItem(OrderItem orderToDelete)
+        {
+            if (orderToDelete == null)
+            {
+                throw new ArgumentNullException(nameof(orderToDelete));
+            }
+
+            _context.Remove(orderToDelete);
+        }
+
+        public async Task<OrderItem> CheckOrderItemExists(OrderItem orderItemToAdd)
+        {
+            if (orderItemToAdd == null)
+            {
+                throw new ArgumentNullException(nameof(orderItemToAdd));
+            }
+
+            return await _context.OrderItem.FindAsync(orderItemToAdd);
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() > 0);
+        }
+
         public void Dispose()
         {
             Dispose(true);

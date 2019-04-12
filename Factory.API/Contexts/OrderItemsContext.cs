@@ -1,4 +1,6 @@
-﻿using Factory.API.Entities;
+﻿
+using AutoMapper.Configuration;
+using Factory.API.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,9 +14,8 @@ namespace Factory.API.Contexts
         public DbSet<OrderItem> OrderItem { get; set; }
 
         public OrderItemsContext(DbContextOptions<OrderItemsContext> options)
-            : base(options)
+           : base(options)
         {
-
         }
     }
 }

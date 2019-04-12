@@ -58,7 +58,7 @@ namespace Factory.API.Controllers
 
             if (search != null)
             {
-                return BadRequest("Customer Exists");
+                return BadRequest("Customer already exists");
             }
 
             _customersRepository.AddCustomer(customerEntity);

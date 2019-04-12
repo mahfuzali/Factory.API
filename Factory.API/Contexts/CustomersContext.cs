@@ -1,4 +1,5 @@
-﻿using Factory.API.Entities;
+﻿using AutoMapper.Configuration;
+using Factory.API.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,9 @@ namespace Factory.API.Contexts
     {
         public DbSet<Customer> Customer { get; set; }
 
-        public CustomersContext(DbContextOptions<CustomersContext> options)
-            : base(options)
+        public CustomersContext(DbContextOptions<CustomersContext> options) 
+           : base(options)
         {
-
         }
     }
 }

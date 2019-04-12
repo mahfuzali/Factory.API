@@ -11,5 +11,13 @@ namespace Factory.API.Services.Interface
         Task<IEnumerable<OrderItem>> GetOrderItemsAsync();
 
         Task<OrderItem> GetOrderItemAsync(int id);
+
+        void AddOrderItem(OrderItem orderToAdd);
+
+        void DeleteOrderItem(OrderItem orderToDelete);
+
+        Task<OrderItem> CheckOrderItemExists(OrderItem customerToAdd);
+
+        Task<bool> SaveChangesAsync();
     }
 }

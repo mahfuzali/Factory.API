@@ -17,7 +17,7 @@ namespace Factory.API.Services
 
         void AddCustomer(Customer customerToAdd);
 
-        // Added
+
         Task<Customer> CheckCustomerExists(Customer customerToAdd);
 
         Task<bool> SaveChangesAsync();

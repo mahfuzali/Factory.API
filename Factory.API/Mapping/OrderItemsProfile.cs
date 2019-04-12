@@ -17,6 +17,7 @@ namespace Factory.API.Mapping
                 //.ForMember(o => o.Order.Customer, dest => dest.Ignore())
                 ;
 
+            CreateMap<OrderItemForCreation, OrderItem>();
 
         }
     }
