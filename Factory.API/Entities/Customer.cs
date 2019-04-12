@@ -28,5 +28,7 @@ namespace Factory.API.Entities
         [StringLength(20)]
         public string Phone { get; set; }
 
+        public ICollection<Order> Orders { get; set; }
+
     }
 }

@@ -19,12 +19,12 @@ namespace Factory.API.Services
 
         public async Task<Customer> GetCustomerAsync(int id)
         {
-            return await _context.Customer.FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Customer.Include(c => c.Orders).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<IEnumerable<Customer>> GetCustomersAsync()
         {
-            return await _context.Customer.ToListAsync();
+            return await _context.Customer.Include(c => c.Orders).ToListAsync();
         }
 
         public void AddCustomer(Customer customerToAdd)

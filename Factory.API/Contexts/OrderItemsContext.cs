@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Factory.API.Contexts
 {
-    public class OrderItemsContext: DbContext
+    public class OrderItemsContext : DbContext
     {
         public DbSet<OrderItem> OrderItem { get; set; }
 

@@ -27,5 +27,6 @@ namespace Factory.API.Entities
         public Order Order { get; set; }
 
         public Product Product { get; set; } 
+        //public ICollection<Product> Products { get; set; }
     }
 }

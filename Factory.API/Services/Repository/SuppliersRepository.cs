@@ -27,7 +27,7 @@ namespace Factory.API.Services
 
         public async Task<IEnumerable<Supplier>> GetSuppliersAsync()
         {
-            return await _context.Supplier.ToListAsync();
+            return await _context.Supplier.Include(p => p.Products).ToListAsync();
         }
 
         public void Dispose()

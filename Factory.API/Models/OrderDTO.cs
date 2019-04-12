@@ -8,7 +8,7 @@ namespace Factory.API.Models
 {
     public class OrderDTO
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         public DateTime OrderDate { get; set; }
 
